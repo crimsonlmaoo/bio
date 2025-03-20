@@ -3,19 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>.</title>
-    <link rel="icon" href="Screenshot 2025-01-28 162206.png" type="image/png" />
+    <title></title>
     <link rel="stylesheet" href="styles.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Lexend:wght@700&display=swap"
       rel="stylesheet"
     />
+    <style>
+      body {
+        position: relative;
+        overflow: hidden;
+        height: 100vh;
+        margin: 0;
+        font-family: "Lexend", sans-serif;
+      }
+
+      .falling-c {
+        position: absolute;
+        font-size: 20px;
+        color: red;
+        transition: transform 1s linear;
+        pointer-events: none;
+        user-select: none;
+      }
+    </style>
   </head>
   <body>
     <video autoplay loop>
       <source src="m.mp4" type="video/mp4" />
     </video>
-
     <div class="container">
       <img src="crimson.cs.gif" alt="Profile Picture" class="profile-pic" />
       <h1 class="profile-name">crimson.cs</h1>
@@ -83,7 +99,7 @@
       timestamp.textContent = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
     }
 
-    const titleText = "crimson.cs";
+    const titleText = "crimson.cs | html + js ♡ ";
     let index = 0;
     let isDeleting = false;
 
@@ -102,9 +118,35 @@
           isDeleting = true;
         }
       }
-      setTimeout(animateTitle, isDeleting ? 65 : 300);
+      setTimeout(animateTitle, isDeleting ? 25 : 200);
     }
 
     animateTitle();
+
+    document.addEventListener("mousemove", (event) => {
+      cpart(event.clientX, event.clientY);
+    });
+
+    function cpart(x, y) {
+      const cElement = document.createElement("div");
+      cElement.textContent = "c";
+      cElement.className = "falling-c";
+      document.body.appendChild(cElement);
+
+      cElement.style.left = `${x}px`;
+      cElement.style.top = `${y}px`;
+
+      setTimeout(() => {
+        cElement.style.transform = `translateY(${window.innerHeight}px)`;
+      }, 0);
+
+      setTimeout(() => {
+        cElement.style.opacity = "0";
+      }, 1000);
+
+      cElement.addEventListener("transitionend", () => {
+        cElement.remove();
+      });
+    }
   </script>
 </html>
