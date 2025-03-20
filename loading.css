@@ -41,3 +41,20 @@ body {
     opacity: 1;
   }
 }
+
+.xtra {
+  font-size: 18px;
+  font-family: "Lexend", sans-serif;
+  text-align: center;
+  color: rgba(255, 0, 0, 0.9);
+  margin-bottom: 10px;
+}
+
+.xtra2 {
+  font-size: 12px;
+  font-family: "Courier New", Courier, monospace;
+  text-align: center;
+  color: rgba(255, 0, 0, 0.9);
+  margin-bottom: 30px;
+  animation: breathing 1.5s infinite;
+}
