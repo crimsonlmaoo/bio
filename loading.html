@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link rel="stylesheet" href="loading.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="loading-screen">
+      <h1 class="loading-text">
+        loading: <span id="loading-percent">0%</span>
+      </h1>
+    </div>
+
+    <script>
+      const loadingPercent = document.getElementById("loading-percent");
+
+      const loadingTime = 2000;
+      let percent = 0;
+
+      const loadingInterval = setInterval(() => {
+        percent += 1;
+        loadingPercent.textContent = `${percent}%`;
+
+        if (percent >= 100) {
+          clearInterval(loadingInterval);
+          window.location.href = "main.html";
+        }
+      }, loadingTime / 100);
+
+      const titleText = "loading... | crimson.cs";
+      let index = 0;
+      let isDeleting = false;
+
+      function animateTitle() {
+        if (isDeleting) {
+          document.title = titleText.substring(0, index);
+          index--;
+          if (index < 0) {
+            isDeleting = false;
+            index = 0;
+          }
+        } else {
+          document.title = titleText.substring(0, index + 1);
+          index++;
+          if (index === titleText.length) {
+            isDeleting = true;
+          }
+        }
+        setTimeout(animateTitle, isDeleting ? 165 : 65);
+      }
+
+      animateTitle();
+    </script>
+  </body>
+</html>
