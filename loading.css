@@ -24,7 +24,7 @@ body {
 }
 
 .loading-text {
-  font-size: 36px;
+  font-size: 28px;
   color: rgba(255, 0, 0, 0.9);
   text-shadow: 0 0 20px rgba(255, 0, 0, 0.9);
   animation: breathing 1.5s infinite;
