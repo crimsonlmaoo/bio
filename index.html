@@ -12,15 +12,17 @@
   </head>
   <body>
     <div id="loading-screen">
+      <h2 class="xtra">took 1 hour :broken_heart:</h2>
       <h1 class="loading-text">
         loading: <span id="loading-percent">0%</span>
       </h1>
+      <h2 class="xtra2">made by crimson in html + js with love ♡</h2>
     </div>
 
     <script>
       const loadingPercent = document.getElementById("loading-percent");
 
-      const loadingTime = 2000;
+      const loadingTime = 4000;
       let percent = 0;
 
       const loadingInterval = setInterval(() => {
@@ -33,7 +35,7 @@
         }
       }, loadingTime / 100);
 
-      const titleText = "loading... | crimson.cs";
+      const titleText = "loading...";
       let index = 0;
       let isDeleting = false;
 
@@ -52,7 +54,7 @@
             isDeleting = true;
           }
         }
-        setTimeout(animateTitle, isDeleting ? 165 : 65);
+        setTimeout(animateTitle, isDeleting ? 65 : 300);
       }
 
       animateTitle();
