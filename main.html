@@ -4,14 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title></title>
-    <link rel="icon" href="Screenshot 2025-01-28 162206.png" type="image/x-icon" />
     <link rel="stylesheet" href="styles.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Lexend:wght@700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap" 
       rel="stylesheet"
     />
     <style>
@@ -23,13 +18,23 @@
         font-family: "Lexend", sans-serif;
       }
 
-      .falling-c {
+      .mparticle {
         position: absolute;
-        font-size: 20px;
-        color: red;
-        transition: transform 1s linear;
+        font-size: 10px;
+        color: blue;
         pointer-events: none;
         user-select: none;
+        opacity: 1;
+        transition: transform 3s linear, opacity 3s linear;
+      }
+
+      .particle {
+        position: absolute;
+        font-size: 9px;
+        color: blue;
+        pointer-events: none;
+        user-select: none;
+        transition: transform 20s linear, opacity 20s linear;
       }
     </style>
   </head>
@@ -125,33 +130,64 @@
       }
       setTimeout(animateTitle, isDeleting ? 25 : 200);
     }
-
-    animateTitle();
+    let particleDelay = 45;
+    let lastMouseMoveTime = 0;
 
     document.addEventListener("mousemove", (event) => {
-      cpart(event.clientX, event.clientY);
+      const currentTime = Date.now();
+      if (currentTime - lastMouseMoveTime > particleDelay) {
+        createParticle(event.clientX, event.clientY + 2);
+        lastMouseMoveTime = currentTime;
+      }
     });
 
-    function cpart(x, y) {
-      const cElement = document.createElement("div");
-      cElement.textContent = "c";
-      cElement.className = "falling-c";
-      document.body.appendChild(cElement);
+    function createParticle(x, y) {
+      const particle = document.createElement("div");
+      particle.className = "mparticle";
+      particle.textContent = "❄️";
+      document.body.appendChild(particle);
 
-      cElement.style.left = `${x}px`;
-      cElement.style.top = `${y}px`;
+      particle.style.left = `${x}px`;
+      particle.style.top = `${y}px`;
+
+      const horizontalMovement = (Math.random() - 0.5) * 725;
+      const fallDistance = window.innerHeight - y;
 
       setTimeout(() => {
-        cElement.style.transform = `translateY(${window.innerHeight}px)`;
+        particle.style.transform = `translate(${horizontalMovement}px, ${
+          window.innerHeight - 50
+        }px)`;
+        particle.style.opacity = 0;
       }, 0);
 
       setTimeout(() => {
-        cElement.style.opacity = "0";
-      }, 1000);
-
-      cElement.addEventListener("transitionend", () => {
-        cElement.remove();
-      });
+        particle.remove();
+      }, 3000);
     }
+    animateTitle();
+
+    function frigginparticleyo() {
+      const particle = document.createElement("div");
+      particle.className = "particle";
+      particle.textContent = "❄️";
+      document.body.appendChild(particle);
+
+      const xPosition = Math.random() * window.innerWidth;
+      particle.style.left = `${xPosition}px`;
+      particle.style.top = `0px`;
+
+      const horizontalMovement = (Math.random() - 0.5) * 1000;
+      const fallDuration = 20;
+
+      setTimeout(() => {
+        particle.style.transform = `translate(${horizontalMovement}px, ${window.innerHeight}px)`;
+      }, 0);
+
+      setTimeout(() => {
+        particle.remove();
+      }, fallDuration * 1000);
+    }
+
+    setInterval(frigginparticleyo, 100);
   </script>
 </html>
